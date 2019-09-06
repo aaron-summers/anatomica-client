@@ -1,9 +1,6 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
-import { Route, Link } from 'react-router-dom';
 import Question from '../components/Question';
-// import QuestionsContainer from './QuestionsContainer';
-import Functions from '../Program/Functions';
 
 export default class Quiz extends React.Component {
 
@@ -12,35 +9,17 @@ export default class Quiz extends React.Component {
         currentQuestion: undefined,
         answeredQuestions: [],
         questionAnswered: false,
-        isFinished: false,
-        score: null
+        isCorrect: null,
+        score: 0
     }
 
     setQuestion = (questions) => {
-        // if (this.state.allQuestions.length > 0) {
-            this.state.allQuestions.map(question => {
-                if (!this.state.answeredQuestions.includes(question) && !this.state.currentQuestion) {
-                    this.setState({ currentQuestion: question })
-                }
-                // if (this.state.currentQuestion) {
-                // this.setUserQuestions()
-                // }   
-                // this.setState({ allQuestions: this.state.allQuestions.filter(q => q.id !== question.id) })
-            })
-        // }
+        this.state.allQuestions.map(question => {
+            if (!this.state.answeredQuestions.includes(question) && !this.state.currentQuestion) {
+                this.setState({ currentQuestion: question })
+            }
+        })
     } 
-
-    // setQuestion = (questions) => {
-    //     if (!this.state.allQuestions.length <= 0) {
-    //         for (let i = 0; i < questions.length; i++) {
-    //             if (!this.state.answeredQuestions.includes(questions[i])) {
-    //                 this.setState({ currentQuestion: questions[i] })
-    //                 this.setUserQuestions(questions[i])
-    //                 this.setState({ allQuestions: this.state.allQuestions.filter(q => q.id !== questions[i].id) })
-    //             }
-    //         }
-    //     } 
-    // }
 
     clearCurrentQuestion = () => {
         if (this.state.allQuestions.length > 0) {
@@ -54,13 +33,17 @@ export default class Quiz extends React.Component {
         }
     }
 
-    checkAnswer = (event, questionId, answer) => {
-        console.log(questionId, answer)
+    checkAnswer = (userAnswer, questionId, answer) => {
+        console.log(questionId, answer, userAnswer)
         let question = this.state.allQuestions.find(question => question.id === questionId)
 
-        this.state.currentQuestion.answer == answer ? 
-        console.log("correct")
-        : console.log('wrong')
+        this.state.currentQuestion.answer == answer 
+        ? this.setState({ isCorrect: true })
+        : this.setState({ isCorrect: false })
+
+        if (userAnswer == answer) { 
+            this.setState({score: this.state.score + 20})
+        }
     }
 
     componentDidMount() {
@@ -71,12 +54,14 @@ export default class Quiz extends React.Component {
         let question = this.state.allQuestions.find(question => question.id === questionId)
         if (isAnswered === true) {
             console.log('next question')
-            await this.setState({ allQuestions: this.state.allQuestions.filter(q => q.id !== questionId), answeredQuestions: [...this.state.answeredQuestions, question] })
+            await this.setState({ allQuestions: this.state.allQuestions.filter(q => q.id !== questionId), 
+                answeredQuestions: [...this.state.answeredQuestions, question] })
             this.setQuestion(this.state.allQuestions)
         }
         this.state.allQuestions.map(q => {
             this.setState({ currentQuestion: q })
         })
+        this.setState({isCorrect: null})
     }
 
     render() {
@@ -87,7 +72,7 @@ export default class Quiz extends React.Component {
                     Begin
                 </Button>
                 : !this.state.allQuestions.length ? <div>You're all done.</div>
-                : <Question {...this.state.currentQuestion} checkAnswer={this.checkAnswer} nextQuestion={this.nextQuestion} />
+                : <Question {...this.state.currentQuestion} checkAnswer={this.checkAnswer} nextQuestion={this.nextQuestion} isCorrect={this.state.isCorrect} score={this.state.score}/>
                 }
             </div>
         )

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, Button} from 'react-bootstrap';
+import {Card, Button, ProgressBar} from 'react-bootstrap';
 import Functions from '../Program/Functions';
 import uuid from 'uuid';
 
@@ -7,7 +7,8 @@ import uuid from 'uuid';
 export default class Question extends React.Component {
     state = {
         answers: [],
-        isAnswered: false
+        isAnswered: false,
+        progress: 0
     }
 
     setAnswers = () => {
@@ -17,18 +18,14 @@ export default class Question extends React.Component {
         this.setState({answers: Functions.shuffle(allAnswers)})
     }
 
-    setChecked = (event) => {
-        console.log(event.target.name)
-        this.setState({checked: event.target.name})
-    }
-
     componentDidMount = () => {
         this.setAnswers()    
     }
 
     handleAnswer = (event, questionId, answer) => {
         this.setState({isAnswered: !this.state.isAnswered})
-        this.props.checkAnswer(event, questionId, answer)
+        this.props.checkAnswer(event.target.innerText, questionId, answer)
+        this.setState({progress: this.state.progress + 20})
     }
 
     setNextQuestion = async (questionId) => {
@@ -38,21 +35,36 @@ export default class Question extends React.Component {
     }
 
     render() {
-        const {id, content, altAnswers, answer, isAnswered} = this.props
+        const {id, content, altAnswers, answer, isAnswered, isCorrect, score} = this.props
         return (
             <div>
                 <Card className="question-card mx-auto">
                     <Card.Body>
+                        <ProgressBar now={this.state.progress}/>
+                        <br/>
                         <Card.Title>
                             {content}
                         </Card.Title>
-                            {this.state.answers.map(answer =>
-                                <Button key={uuid('iewugfqeuf')} className="card btn answer-card mx-auto" variant="outline-dark" onClick={(e) => this.handleAnswer(e, id, answer)}>
-                                    <div className="answer-text">{answer}</div>
-                            </Button>
-                            )
-                        }
-                        {this.state.isAnswered ? <Button onClick={() => this.setNextQuestion(id)} variant="outline-dark">Next</Button> : <></>}
+                        <Card>
+                            <Card.Body>Score: {score}</Card.Body>
+                        </Card>
+                            {
+                                this.state.answers.map(ans =>
+                                    <Button 
+                                    key={uuid('iewugfqeuf')} 
+                                    className="answer-card mx-auto" 
+                                    variant={ this.props.isCorrect == null 
+                                        ? "outline-dark" : (this.props.isCorrect == true) && (ans == answer) ? "success" 
+                                        : "outline-danger"} onClick={(e) => this.handleAnswer(e, id, answer)} 
+                                    disabled={this.state.isAnswered ? true : false}>
+                                        <div className="answer-text">{ans}</div>
+                                </Button>
+                                )
+                            }
+                        {this.state.isAnswered 
+                            ? <div><br/>
+                            <Button onClick={() => this.setNextQuestion(id)} variant="outline-dark">Next</Button></div>
+                            : <></>}
                     </Card.Body>
                 </Card>
             </div>
