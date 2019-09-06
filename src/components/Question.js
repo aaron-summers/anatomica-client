@@ -2,6 +2,7 @@ import React from 'react';
 import {Card, Button, ProgressBar} from 'react-bootstrap';
 import Functions from '../Program/Functions';
 import uuid from 'uuid';
+import _ from 'lodash';
 
 
 export default class Question extends React.Component {
@@ -15,7 +16,8 @@ export default class Question extends React.Component {
         let answer = []
         answer.push(this.props.answer)
         let allAnswers = [...answer, ...this.props.altAnswers]
-        this.setState({answers: Functions.shuffle(allAnswers)})
+        allAnswers = _.shuffle(allAnswers)
+        this.setState({answers: allAnswers})
     }
 
     componentDidMount = () => {

@@ -23,11 +23,10 @@ code {
   padding: 5px;
 }
 
-.question-card {
+.question-card, .finished-card {
   margin: 10rem;
   width: 80rem;
 }
-
 
 .answer-card {
   border-radius: 10rem;
