@@ -69,6 +69,7 @@ nav {
   width: 40vw;
   height: 4rem;
   margin: 15px;
+  justify-content: center;
 }
 
 .begin-btn {

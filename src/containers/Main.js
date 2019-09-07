@@ -61,7 +61,6 @@ export default class Main extends React.Component {
                             <NavDropdown title="Options" id="dropdown-menu">
                                 <NavDropdown.Item><Button className="logout-btn" as={Link} to={"/"} variant="outline-danger" onClick={this.logOut}>Log Out</Button></NavDropdown.Item>
                             </NavDropdown>
-                            {/* <Nav.Item></Nav.Item> */}
                         </Nav>
                     </Navbar>
                     {
