@@ -2,7 +2,7 @@ import React from 'react';
 import API from '../adapters/API';
 import FormContainer from './FormContainer';
 import CategoriesContainer from './CategoriesContainer';
-import { Navbar, Nav, Button } from 'react-bootstrap';
+import { Navbar, Nav, Button, NavDropdown } from 'react-bootstrap';
 import {Route, Link} from 'react-router-dom';
 import Quiz from './Quiz';
 
@@ -54,17 +54,21 @@ export default class Main extends React.Component {
                 {
                     this.state.user ? 
                     <div>
-                    <Navbar bg="dark" variant="dark">
+                    <Navbar sticky="top" bg="dark" variant="dark">
                         <Navbar.Brand href="/">Anatomica</Navbar.Brand>
-                        <Nav className="mr-auto">
-                            <Nav.Link  as={Link} to={"/select"} onClick={this.handleClick}>Quiz</Nav.Link>
-                            <Button as={Link} to={"/"} variant="outline-danger" onClick={this.logOut}>Log Out</Button>
+                        <Nav className="ml-auto">
+                            <Nav.Item><Nav.Link as={Link} to={"/select"} onClick={this.handleClick}>Quiz</Nav.Link></Nav.Item>
+                            <NavDropdown title="Options" id="dropdown-menu">
+                                <NavDropdown.Item><Button className="logout-btn" as={Link} to={"/"} variant="outline-danger" onClick={this.logOut}>Log Out</Button></NavDropdown.Item>
+                            </NavDropdown>
+                            {/* <Nav.Item></Nav.Item> */}
                         </Nav>
                     </Navbar>
                     {
                         this.state.quiz
                         ? <Route exact path={"/quiz"} component={(props) => <Quiz {...this.state.quiz}/>} />
-                        : <CategoriesContainer setQuiz={this.setQuiz} categories={this.state.categories}/> 
+                        : this.state.categories.length ? <CategoriesContainer setQuiz={this.setQuiz} categories={this.state.categories}/>
+                        : <></>
                     }
                 </div> 
                 : <>

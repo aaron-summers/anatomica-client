@@ -16,8 +16,7 @@ export default class Question extends React.Component {
         let answer = []
         answer.push(this.props.answer)
         let allAnswers = [...answer, ...this.props.altAnswers]
-        allAnswers = _.shuffle(allAnswers)
-        this.setState({answers: allAnswers})
+        this.setState({answers: _.shuffle(allAnswers)})
     }
 
     componentDidMount = () => {
@@ -54,7 +53,7 @@ export default class Question extends React.Component {
                                 this.state.answers.map(ans =>
                                     <Button 
                                     key={uuid('iewugfqeuf')} 
-                                    className="answer-card mx-auto" 
+                                    className="card answer-card mx-auto" 
                                     variant={ this.props.isCorrect == null 
                                         ? "outline-dark" : (this.props.isCorrect == true) && (ans == answer) ? "success" 
                                         : "outline-danger"} onClick={(e) => this.handleAnswer(e, id, answer)} 

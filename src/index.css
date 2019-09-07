@@ -5,6 +5,11 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+display: none;
 }
 
 code {
@@ -12,8 +17,36 @@ code {
     monospace;
 }
 
+nav {
+  margin: 2px;
+  border-radius: 8px;
+  z-index: 10;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+}
+
+.logout-btn {
+  width: 120px;
+}
+
+.dropdown-menu {
+  width: auto;
+  margin: 10px -68px;
+} 
+
 .form-control {
   border-radius: 20rem;
+}
+
+.categories-container {
+  z-index: 5;
+  margin-top: 8rem;
+  width: 80vw; 
+}
+
+.category-card { 
+  width: 25vw;
+  cursor: 'pointer';
+  margin: 25px;
 }
 
 .username-group, .password-group {
@@ -25,17 +58,35 @@ code {
 
 .question-card, .finished-card {
   margin: 10rem;
-  width: 80rem;
+  width: 80vw;
 }
 
 .answer-card {
   border-radius: 10rem;
   align-items: center;
-  width: 40rem;
+  width: 40vw;
   height: 4rem;
   margin: 15px;
 }
 
+.begin-btn {
+  border-radius: 20px;
+  margin: 10rem;
+  width: 80vw;
+  height: 30rem;
+  align-items: center;
+  transition: all .3s ease-in-out;
+}
+
+.begin-btn:hover {
+  transform: scale(1.1)
+}
+
 .answer-text {
   margin: auto;
+}
+
+.begin-text {
+  margin: auto;
+  font-size: 5rem;
 }

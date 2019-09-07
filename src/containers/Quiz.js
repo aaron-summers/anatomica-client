@@ -68,9 +68,9 @@ export default class Quiz extends React.Component {
         return (
             <div>
                 { !this.state.currentQuestion 
-                ? <Button onClick={() => this.setQuestion()} className="card mx-auto begin-btn" variant="outline-dark">
-                    Begin
-                </Button>
+                ? <div className="begin-container"><Button onClick={() => this.setQuestion()} className="card mx-auto begin-btn" variant="outline-dark">
+                    <div className="begin-text">Start</div>
+                </Button> </div>
                     : !this.state.allQuestions.length ? <div> <Card className="finished-card mx-auto"><Card.Title>You're all done.</Card.Title><Card.Text>Score: {this.state.score}</Card.Text></Card>
                 </div>
                 : <Question {...this.state.currentQuestion} checkAnswer={this.checkAnswer} nextQuestion={this.nextQuestion} isCorrect={this.state.isCorrect} score={this.state.score}/>

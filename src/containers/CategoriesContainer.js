@@ -1,13 +1,14 @@
 import React from 'react';
-import Category from '../components/Category'
+import Category from '../components/Category';
+import { Card, Button, Col, Row } from 'react-bootstrap';
 
 export default class CategoriesContainer extends React.Component {
     render() {
         const {categories} = this.props
         return (
-            <div>
-                {categories.map(category => <Category key={category.serial} {...category} setQuiz={this.props.setQuiz}/>)}
-            </div>
+                <Card className="categories-container mx-auto">
+                    <Card.Body className="row">{categories.map(category => <Category key={category.serial} {...category} setQuiz={this.props.setQuiz} />)}</Card.Body>                
+            </Card>
         )
     }
 }
