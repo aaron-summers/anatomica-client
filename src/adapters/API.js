@@ -38,7 +38,7 @@ const signUp = (user) => fetch(signupUrl, {
     .then(saveToken)
     .catch(handleServerError)
 
-const logIn = (user) => fetch(loginUrl, {
+const logIn = async (user) => await fetch(loginUrl, {
     method: 'POST',
     headers: constructHeaders({'Content-Type': 'application/json'}),
     body: JSON.stringify({ user })
@@ -46,10 +46,10 @@ const logIn = (user) => fetch(loginUrl, {
     .then(saveToken)
     .catch(handleServerError)
 
-const validateUser = () => {
+const validateUser = async () => {
     if (!localStorage.getItem('token')) return Promise.resolve()
 
-    return fetch(validateUrl, {
+    return await fetch(validateUrl, {
         headers: constructHeaders()
     }).then(jsonify)
         .then(saveToken)

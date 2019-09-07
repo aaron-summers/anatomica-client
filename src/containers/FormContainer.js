@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 const FormContainer = ({ user, signUp, logIn, logOut }) => {
     return (
         <div>
-            <Navbar bg="dark" variant="dark">
+            <Navbar bg="light" variant="info">
             <div>
                 <Navbar.Brand>Anatomica</Navbar.Brand>
             </div>

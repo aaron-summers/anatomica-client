@@ -21,7 +21,7 @@ nav {
   margin: 2px;
   border-radius: 8px;
   z-index: 10;
-  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  box-shadow: 1px 4px 4px rgba(0, 0, 0, .45);
 }
 
 .logout-btn {
@@ -38,12 +38,14 @@ nav {
 }
 
 .categories-container {
+  border-radius: 10px;
   z-index: 5;
   margin-top: 8rem;
   width: 80vw; 
 }
 
 .category-card { 
+  border-radius: 10px;
   width: 25vw;
   cursor: 'pointer';
   margin: 25px;

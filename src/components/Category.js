@@ -16,7 +16,7 @@ export default class Category extends React.Component {
                     <Card.Body>
                         <Card.Title>{system}</Card.Title>
                         <hr></hr>
-                        <Button as={Link} to={'/quiz'} onClick={() => this.handleClick(id)} variant="outline-primary">Start Quiz</Button>
+                        <Button as={Link} to={'/quiz'} onClick={() => this.handleClick(id)} variant="outline-dark">Start Quiz</Button>
                     </Card.Body>
                 </Card>
             </div>

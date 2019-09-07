@@ -14,7 +14,7 @@ export default class Main extends React.Component {
         quiz: null,
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         API.validateUser()
             .then(user => {
                 this.setState({ user })
@@ -26,7 +26,7 @@ export default class Main extends React.Component {
             .then(user => this.setState({ user }))
     }
 
-    logIn = user => {
+    logIn = (user) => {
         API.logIn(user)
             .then(user => this.setState({ user }))
     }
@@ -54,7 +54,7 @@ export default class Main extends React.Component {
                 {
                     this.state.user ? 
                     <div>
-                    <Navbar sticky="top" bg="dark" variant="dark">
+                    <Navbar sticky="top" bg="light" variant="primary">
                         <Navbar.Brand href="/">Anatomica</Navbar.Brand>
                         <Nav className="ml-auto">
                             <Nav.Item><Nav.Link as={Link} to={"/select"} onClick={this.handleClick}>Quiz</Nav.Link></Nav.Item>
