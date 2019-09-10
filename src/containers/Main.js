@@ -6,7 +6,6 @@ import { Navbar, Nav, Button, NavDropdown } from 'react-bootstrap';
 import {Route, Link} from 'react-router-dom';
 import Quiz from './Quiz';
 import Explore from '../components/Explore';
-import MaleSkeltalSystem from '../components/MaleSkeletalSystem';
 import Human from '../adapters/HumanAPI';
 
 export default class Main extends React.Component {
@@ -78,15 +77,14 @@ export default class Main extends React.Component {
                     <Navbar sticky="top" bg="light" variant="primary">
                         <Navbar.Brand href="/">Anatomica</Navbar.Brand>
                         <Nav className="ml-auto">
-                            <Nav.Item><Nav.Link as={Link} to="/explore" onClick={() => this.clearStates()}>Explore</Nav.Link></Nav.Item>
+                            <Nav.Item><Nav.Link as={Link} to="/explore/systems" onClick={() => this.clearStates()}>Explore</Nav.Link></Nav.Item>
                             <Nav.Item><Nav.Link as={Link} to={"/select"} onClick={this.handleClick}>Quiz</Nav.Link></Nav.Item>
                             <NavDropdown title="Options" id="dropdown-menu">
-                                <NavDropdown.Item><Button className="logout-btn" variant="outline-danger" onClick={this.logOut}>Log Out</Button></NavDropdown.Item>
+                                <div className="dropdown-item"><Button as={Link} to={"/"} className="logout-btn" variant="outline-danger" onClick={() => this.logOut()}>Log Out</Button></div>
                             </NavDropdown>
                         </Nav>
                     </Navbar>
                     <Route path={"/explore"} component={Explore} />
-                    <Route path={"/male"} component={MaleSkeltalSystem} />
                     {
                         this.state.quiz
                         ? <Route exact path={"/quiz"} component={(props) => <Quiz {...this.state.quiz} destroyQuiz={this.destroyQuiz} clearStates={this.clearStates} isFinished={this.state.isFinished} />} />
