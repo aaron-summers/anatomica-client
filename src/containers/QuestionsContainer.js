@@ -7,10 +7,6 @@ export default class QuestionsContainer extends React.Component {
         currentQuestion: undefined
     }
 
-    // componentDidMount = () => {
-    //     this.props.question.map
-    // }
-
     render() {
         const { questions } = this.props
         return (

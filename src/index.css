@@ -18,6 +18,7 @@ code {
 }
 
 nav {
+  width: 100vw;
   margin: 2px;
   border-radius: 8px;
   z-index: 10;
@@ -42,6 +43,18 @@ nav {
   z-index: 5;
   margin-top: 8rem;
   width: 80vw; 
+}
+
+.sex-category-container-card {
+  margin-top: 8rem;
+  height: 60vh;
+  width: 60vw;
+}
+
+.sex-category-card {
+  align-self: center;
+  width: 20vw;
+  height: 10rem;
 }
 
 .category-card { 

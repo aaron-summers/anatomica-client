@@ -1,17 +1,22 @@
 import React from 'react';
 import API from '../adapters/API';
 import FormContainer from './FormContainer';
-import CategoriesContainer from './CategoriesContainer';
+import QuizCategoriesContainer from './QuizCategoriesContainer';
 import { Navbar, Nav, Button, NavDropdown } from 'react-bootstrap';
 import {Route, Link} from 'react-router-dom';
 import Quiz from './Quiz';
+import Explore from '../components/Explore';
+import MaleSkeltalSystem from '../components/MaleSkeletalSystem';
+import Human from '../adapters/HumanAPI';
 
 export default class Main extends React.Component {
 
     state = {
         user: undefined,
         categories: [],
+        isFinished: false,
         quiz: null,
+        biodigitalData: []
     }
 
     componentDidMount = () => {
@@ -48,25 +53,44 @@ export default class Main extends React.Component {
         API.createQuiz(category_id).then(data => this.setState({ quiz: data.quiz }))
     }
 
+    destroyQuiz = (length) => {
+        if (!length) {
+            this.setState({ quiz: null})
+        }
+    }
+
+    showScore = (score) => {
+        console.log(score)
+    }
+
+    clearStates = (length) => {
+        if (!length) {
+            this.setState({ categories: [] })
+        }
+    }
+
     render() {
         return (
             <div className="App">
                 {
-                    this.state.user ? 
+                    this.state.user ?
                     <div>
                     <Navbar sticky="top" bg="light" variant="primary">
                         <Navbar.Brand href="/">Anatomica</Navbar.Brand>
                         <Nav className="ml-auto">
+                            <Nav.Item><Nav.Link as={Link} to="/explore" onClick={() => this.clearStates()}>Explore</Nav.Link></Nav.Item>
                             <Nav.Item><Nav.Link as={Link} to={"/select"} onClick={this.handleClick}>Quiz</Nav.Link></Nav.Item>
                             <NavDropdown title="Options" id="dropdown-menu">
-                                <NavDropdown.Item><Button className="logout-btn" as={Link} to={"/"} variant="outline-danger" onClick={this.logOut}>Log Out</Button></NavDropdown.Item>
+                                <NavDropdown.Item><Button className="logout-btn" variant="outline-danger" onClick={this.logOut}>Log Out</Button></NavDropdown.Item>
                             </NavDropdown>
                         </Nav>
                     </Navbar>
+                    <Route path={"/explore"} component={Explore} />
+                    <Route path={"/male"} component={MaleSkeltalSystem} />
                     {
                         this.state.quiz
-                        ? <Route exact path={"/quiz"} component={(props) => <Quiz {...this.state.quiz}/>} />
-                        : this.state.categories.length ? <CategoriesContainer setQuiz={this.setQuiz} categories={this.state.categories}/>
+                        ? <Route exact path={"/quiz"} component={(props) => <Quiz {...this.state.quiz} destroyQuiz={this.destroyQuiz} clearStates={this.clearStates} isFinished={this.state.isFinished} />} />
+                        : this.state.categories.length ? <QuizCategoriesContainer setQuiz={this.setQuiz} categories={this.state.categories}/>
                         : <></>
                     }
                 </div> 

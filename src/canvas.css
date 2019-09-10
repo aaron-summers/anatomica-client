@@ -1,0 +1,31 @@
+.male-skeleton-card {
+    border-radius: 20px;
+    margin-top: 2vh;
+    /* margin-left: 2vw; */
+    /* justify-content: center; */
+    width: 95vw;
+    height: auto;
+}
+
+.male-skeleton {
+    position: relative;
+    border-radius: 20px;
+    width: 88vw;
+    height: 85vh;  
+}
+
+.systems-container-card {
+    margin: 5px;
+    width: 80vw;
+}
+
+.system-card{
+    margin: 10px;
+    width: 20rem;
+    height: auto;
+}
+
+.system-img {
+    width: auto;
+    object-fit: cover;
+}

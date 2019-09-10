@@ -2,7 +2,7 @@ import React from 'react';
 import Category from '../components/Category';
 import { Card, Button, Col, Row } from 'react-bootstrap';
 
-export default class CategoriesContainer extends React.Component {
+export default class QuizCategoriesContainer extends React.Component {
     render() {
         const {categories} = this.props
         return (
