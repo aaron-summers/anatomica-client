@@ -36,7 +36,7 @@ export default class Question extends React.Component {
     }
 
     render() {
-        const {id, content, altAnswers, answer, isAnswered, isCorrect, score} = this.props
+        const {id, content, answer, score} = this.props
         return (
             <div>
                 <Card className={"question-card mx-auto"}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import Category from '../components/Category';
-import { Card, Button, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 
 export default class QuizCategoriesContainer extends React.Component {
     render() {

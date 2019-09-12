@@ -1,4 +1,4 @@
-const endpoint = 'http://localhost:3000/api'
+const endpoint = 'https://anatomica-rails-api.herokuapp.com/api'
 const signupUrl = `${endpoint}/users`
 const loginUrl = `${endpoint}/login`
 const validateUrl = `${endpoint}/validate`

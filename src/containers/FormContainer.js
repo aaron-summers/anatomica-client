@@ -1,8 +1,7 @@
 import React from 'react';
 import SignupForm from '../components/SignupForm';
 import LoginForm from '../components/LoginForm'
-import { Navbar, Nav, Button } from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import { Navbar } from 'react-bootstrap';
 
 const FormContainer = ({ user, signUp, logIn, logOut }) => {
     return (

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
-import { Card, Button, Row, Col } from 'react-bootstrap';
+import { Card, Row} from 'react-bootstrap';
 import uuid from 'uuid'
 import System from '../components/System';
 

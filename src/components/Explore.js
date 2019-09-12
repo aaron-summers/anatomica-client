@@ -1,7 +1,6 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
-import { Card, Button, Row, Col } from 'react-bootstrap';
-import uuid from 'uuid';
+import { Route } from 'react-router-dom';
+import { Card } from 'react-bootstrap';
 import Human from '../adapters/HumanAPI';
 import SystemsContainer from '../containers/SystemsContainer';
 import Iframe from './Iframe'

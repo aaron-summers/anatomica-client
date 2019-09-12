@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Button } from 'react-bootstrap';
 import Question from '../components/Question';
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default class Quiz extends React.Component {
 
@@ -25,8 +25,8 @@ export default class Quiz extends React.Component {
 
     //check current question's answer and change isCorrect state and update score accordingly
     checkAnswer = (userAnswer, questionId, answer) => {
-        console.log(questionId, answer, userAnswer)
-        let question = this.state.allQuestions.find(question => question.id === questionId)
+        // console.log(questionId, answer, userAnswer)
+        // let question = this.state.allQuestions.find(question => question.id === questionId)
 
         this.state.currentQuestion.answer == answer 
         ? this.setState({ isCorrect: true })
@@ -46,7 +46,7 @@ export default class Quiz extends React.Component {
     nextQuestion = async (isAnswered, questionId) => {
         let question = this.state.allQuestions.find(question => question.id === questionId)
         if (isAnswered === true) {
-            console.log('next question')
+            // console.log('next question')
             await this.setState({ allQuestions: this.state.allQuestions.filter(q => q.id !== questionId), 
                 answeredQuestions: [...this.state.answeredQuestions, question] })
             this.setQuestion(this.state.allQuestions)
@@ -77,7 +77,7 @@ export default class Quiz extends React.Component {
                         <Card className="finished-card mx-auto">
                             <Card.Title>You're all done.</Card.Title>
                             <Card.Text>Score: {this.state.score}</Card.Text>
-                            <Button as={Link} to={"/"} onClick={() => this.handleFinish()} variant="outline-dark">Finish</Button></Card>
+                            <Button as={Link} to={"/select"} onClick={() => this.handleFinish()} variant="outline-dark">Finish</Button></Card>
                     </div>
                 : <Question {...this.state.currentQuestion} checkAnswer={this.checkAnswer} nextQuestion={this.nextQuestion} isCorrect={this.state.isCorrect} score={this.state.score}/>
                 }

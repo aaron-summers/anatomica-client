@@ -6,7 +6,8 @@ import { Navbar, Nav, Button, NavDropdown } from 'react-bootstrap';
 import {Route, Link} from 'react-router-dom';
 import Quiz from './Quiz';
 import Explore from '../components/Explore';
-import Human from '../adapters/HumanAPI';
+// import heart from '../assets/anatomical_heart'
+import Home from '../components/Home';
 
 export default class Main extends React.Component {
 
@@ -19,6 +20,7 @@ export default class Main extends React.Component {
     }
 
     componentDidMount = () => {
+        if (!localStorage.getItem('token')) return Promise.resolve()
         API.validateUser()
             .then(user => {
                 this.setState({ user })
@@ -75,15 +77,22 @@ export default class Main extends React.Component {
                     this.state.user ?
                     <div>
                     <Navbar sticky="top" bg="light" variant="primary">
-                        <Navbar.Brand href="/">Anatomica</Navbar.Brand>
+                        <Navbar.Brand href="/">
+                            <img height="45px" width="50px" src="https://publicdomainvectors.org/photos/anatomical_heart.png"/>
+                            Anatomica
+                        </Navbar.Brand>
+                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                        <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ml-auto">
-                            <Nav.Item><Nav.Link as={Link} to="/explore/systems" onClick={() => this.clearStates()}>Explore</Nav.Link></Nav.Item>
-                            <Nav.Item><Nav.Link as={Link} to={"/select"} onClick={this.handleClick}>Quiz</Nav.Link></Nav.Item>
+                            <Nav.Link as={Link} to="/explore/systems" onClick={() => this.clearStates()}>Explore</Nav.Link>
+                            <Nav.Link as={Link} to={"/select"} onClick={this.handleClick}>Quiz</Nav.Link>
                             <NavDropdown title="Options" id="dropdown-menu">
                                 <div className="dropdown-item"><Button as={Link} to={"/"} className="logout-btn" variant="outline-danger" onClick={() => this.logOut()}>Log Out</Button></div>
                             </NavDropdown>
                         </Nav>
+                        </Navbar.Collapse>
                     </Navbar>
+                    <Route exact path={"/"} component={(props) => <Home /> }/>
                     <Route path={"/explore"} component={Explore} />
                     {
                         this.state.quiz
